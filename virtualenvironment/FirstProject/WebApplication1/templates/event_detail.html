@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ event.title }}</h2>
+<p>{{ event.description }}</p>
+<p><b>Date:</b> {{ event.date }}</p>
+<p><b>Location:</b> {{ event.location }}</p>
+<p><b>Registrations:</b> {{ count }}</p>
+
+{% if user.is_authenticated %}
+   {% if already_registered %}
+      <p style="color:green;">You Already Registered</p>
+    {% else %}
+       <a href="{% url 'register_event' event.id %}">Register</a>
+    {% endif %}
+
+{% else %}
+ <p>Please Login to register</p>
+{% endif %}
+
+<a href="/register/{{ event.id }}/">Register</a>
+{% endblock %}
